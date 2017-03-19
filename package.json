@@ -1,0 +1,12 @@
+{
+  "name": "bike-app",
+  "version": "0.0.1",
+  "description": "A simple dashboard for NYC bike ridders",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Awwab Ul Haq",
+  "license": "ISC"
+}
