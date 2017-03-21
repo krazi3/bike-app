@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Map from './map.jsx';
+import UsageGraph from './usage_graph.jsx';
 
 export default class Main extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class Main extends Component {
     return (
       <div>
         <Map stations={this.state.stations} stationStatus={this.state.station_status}/>
+        <UsageGraph stations={this.state.stations} stationStatus={this.state.station_status}/>
       </div>
     )
   }
