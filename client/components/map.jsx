@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
 
 export default class Map extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      station: '',
-      distance: '',
-    }
-  }
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
-  }
   search(event) {
     event.preventDefault();
 
-    if(!this.state.station || !this.state.distance) {
+    if(!event.target.station.value || !event.target.distance.value) {
       return false;
     }
-    var center = {lat: this.props.stations[this.state.station].lat, lng: this.props.stations[this.state.station].lon}
+    var center = {lat: this.props.stations[event.target.station.value].lat, lng: this.props.stations[event.target.station.value].lon}
     this.map.panTo(center)
-    this.markers[this.state.station].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
     this.circle = new google.maps.Circle({
       center,
       map: this.map,
       visible: false,
-      radius: this.state.distance * 1000
+      radius: event.target.distance.value * 1000
     })
     var bounds = this.circle.getBounds();
     this.markers.forEach((marker, index) => {
@@ -36,16 +24,22 @@ export default class Map extends Component {
       }
     })
   }
+  reset() {
+    this.markers.forEach(marker => {
+      marker.setMap(this.map)
+    })
+  }
   render() {
     return (
       <div>
         <form onSubmit={e => this.search(e)}>
-          <select name="station" value={this.state.station} onChange={e => this.handleChange(e)}>
+          <select name="station">
             <option value=''>Select station</option>
               {this.props.stations.map((station, index) => <option key={index} value={index}>{station.name}</option>)}
           </select>
-          <input type="text" name="distance" placeholder="Distance(kms)" value={this.state.distance} onChange={e => this.handleChange(e)}/>
+          <input type="text" name="distance" placeholder="Distance(kms)"/>
           <button>Search</button>
+          <button type="reset" onClick={e => this.reset()}>Reset</button>
         </form>
         <div ref="map" style={{height: 500, width: '100%'}}></div>
       </div>
