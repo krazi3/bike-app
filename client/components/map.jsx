@@ -31,15 +31,15 @@ export default class Map extends Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={e => this.search(e)}>
-          <select name="station">
+      <div style={{marginBottom: 10}}>
+        <form onSubmit={e => this.search(e)} className="form-inline">
+          <select name="station" className="form-control">
             <option value=''>Select station</option>
               {this.props.stations.map((station, index) => <option key={index} value={index}>{station.name}</option>)}
           </select>
-          <input type="text" name="distance" placeholder="Distance(kms)"/>
-          <button>Search</button>
-          <button type="reset" onClick={e => this.reset()}>Reset</button>
+          <input type="text" name="distance" className="form-control" placeholder="Distance(kms)"/>
+          <button className="btn btn-default">Search</button>
+          <button type="reset" className="btn btn-default" onClick={e => this.reset()}>Reset</button>
         </form>
         <div ref="map" style={{height: 500, width: '100%'}}></div>
       </div>

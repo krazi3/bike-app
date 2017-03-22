@@ -25,7 +25,7 @@ export default class HistoricalGraph extends Component {
   render() {
     return (
       <div>
-        <select name="station" onChange={e => this.handleChange(e)}>
+        <select name="station" className="form-control" onChange={e => this.handleChange(e)}>
           <option value="all">All stations</option>
             {this.props.stations.map((station, index) => <option key={index} value={index}>{station.name}</option>)}
         </select>

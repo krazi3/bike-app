@@ -36,10 +36,17 @@ export default class Main extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
+        <h2>NYC Bike Sharing Dashboard</h2>
         <Map stations={this.state.stations} stationStatus={this.state.station_status.data.stations}/>
-        <UsageGraph stations={this.state.stations} stationStatus={this.state.station_status.data.stations}/>
-        <HistoricalGraph stations={this.state.stations} stationStatus={this.state.station_status} nextStationStatus={this.state.next_station_status}/>
+        <div className="row">
+          <div className="col-sm-6">
+            <UsageGraph stations={this.state.stations} stationStatus={this.state.station_status.data.stations}/>
+          </div>
+          <div className="col-sm-6">
+            <HistoricalGraph stations={this.state.stations} stationStatus={this.state.station_status} nextStationStatus={this.state.next_station_status}/>
+          </div>
+        </div>
       </div>
     )
   }
