@@ -25,6 +25,9 @@ export default class UsageGraph extends Component {
       </div>
     )
   }
+  shouldComponentUpdate(nextProps) {
+    return this.props.stations.length != nextProps.stations.length ? true : false;
+  }
   componentDidUpdate() {
     this.total = 0;
     this.total_available = 0;

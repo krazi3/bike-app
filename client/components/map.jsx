@@ -45,6 +45,9 @@ export default class Map extends Component {
       </div>
     )
   }
+  shouldComponentUpdate(nextProps) {
+    return this.props.stations.length != nextProps.stations.length ? true : false;
+  }
   componentDidMount() {
     this.markers = []
     this.map = new google.maps.Map(this.refs.map, {
