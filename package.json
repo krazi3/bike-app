@@ -16,10 +16,14 @@
     "babel-preset-latest": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
+    "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",
+    "css-loader": "^0.27.3",
+    "file-loader": "^0.10.1",
     "moment": "^2.18.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "style-loader": "^0.16.0",
     "webpack": "^1.14.0"
   },
   "devDependencies": {
