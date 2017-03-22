@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Map from './map.jsx';
 import UsageGraph from './usage_graph.jsx';
+import HistoricalGraph from './historical_graph.jsx';
 
 export default class Main extends Component {
   constructor(props) {
@@ -9,7 +10,12 @@ export default class Main extends Component {
 
     this.state = {
       stations: [],
-      station_status: [],
+      station_status: {
+        data: {
+          stations: []
+        }
+      },
+      next_station_status: [],
     }
   }
   componentWillMount() {
@@ -20,15 +26,20 @@ export default class Main extends Component {
     .then(results => {
       this.setState({
         stations: results[0].data.data.stations,
-        station_status: results[1].data.data.stations
+        station_status: results[1].data
       })
+      setInterval(() => {
+        axios.get('https://gbfs.citibikenyc.com/gbfs/en/station_status.json')
+          .then(response => this.setState({next_station_status: response.data}))
+      }, 10000)
     })
   }
   render() {
     return (
       <div>
-        <Map stations={this.state.stations} stationStatus={this.state.station_status}/>
-        <UsageGraph stations={this.state.stations} stationStatus={this.state.station_status}/>
+        <Map stations={this.state.stations} stationStatus={this.state.station_status.data.stations}/>
+        <UsageGraph stations={this.state.stations} stationStatus={this.state.station_status.data.stations}/>
+        <HistoricalGraph stations={this.state.stations} stationStatus={this.state.station_status} nextStationStatus={this.state.next_station_status}/>
       </div>
     )
   }
