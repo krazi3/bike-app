@@ -17,7 +17,7 @@ export default class HistoricalGraph extends Component {
     } else {
       this.chart.data.datasets[0].data = []
       this.data.forEach((stationStatus, index) => {
-        this.chart.data.datasets[0].data.push(this.props.stations[index].capacity - stationStatus.data.stations[this.current].num_bikes_available)
+        this.chart.data.datasets[0].data.push(this.props.stations[this.current].capacity - stationStatus.data.stations[this.current].num_bikes_available)
       })
     }
     this.chart.update();
